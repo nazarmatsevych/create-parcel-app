@@ -5,13 +5,13 @@
 ### This application allows users to create requests for parcel transportation or delivery services to other users.
 
 Main Pages:
-/<id>/create: Select the type of request (order or deliver).
-/<id>/create/order: Create an order request.
-/<id>/create/deliver: Create a delivery request.
-/<id>/requests: List of all user requests.
-/requests: List of all requests.
-/<id>: Redirects to /<id>/requests.
-<id>: Identifies the user, and requests are associated with this parameter.
+* /<id>/create: Select the type of request (order or deliver).
+* /<id>/create/order: Create an order request.
+* /<id>/create/deliver: Create a delivery request.
+* /<id>/requests: List of all user requests.
+* /requests: List of all requests.
+* /<id>: Redirects to /<id>/requests.
+* <id>: Identifies the user, and requests are associated with this parameter.
 
 ## Technologies
 
