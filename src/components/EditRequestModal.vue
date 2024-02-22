@@ -94,3 +94,4 @@ const areRequiredFieldsFilled = computed(() => {
   return !!props.updatedRequest?.fromCity && !!props.updatedRequest?.toCity;
 });
 </script>
+
