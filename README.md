@@ -1,6 +1,6 @@
 # parcel app
 
-### [DEMO LINK](https://nazarmatsevych.github.io/simple-weather-app/)
+### [DEMO LINK](https://nazarmatsevych.github.io/create-parcel-app/#/)
 
 ### This application allows users to create requests for parcel transportation or delivery services to other users.
 
