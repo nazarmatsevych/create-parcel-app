@@ -70,17 +70,12 @@
 
 <script setup lang="ts">
 import { useRequestsStore } from "@/stores/requests";
-import { useRoute } from "vue-router";
 import type { IDeliverTypeForm, IOrderTypeForm } from "@/types/request.types";
 import { computed, ref } from "vue";
 import EditRequestModal from "@/components/EditRequestModal.vue";
 import ListOfSimilarRequestsModal from "@/components/ListOfSimilarRequestsModal.vue";
 
-const route = useRoute();
-
 const requestsStore = useRequestsStore();
-
-const userId = route.params.id;
 
 const updatedRequest = ref<IDeliverTypeForm | IOrderTypeForm>();
 const isEditModalVisible = ref(false);
@@ -88,7 +83,7 @@ const isListOfSimilarRequestsModalVisible = ref(false);
 const selectedRequestId = ref(0);
 
 const userRequests = computed<(IDeliverTypeForm & IOrderTypeForm)[]>(() =>
-  requestsStore.requests.filter((request) => request.userId === userId),
+  requestsStore.requests.filter((request) => request.userId === requestsStore.currentUserId),
 );
 
 const showEditNotificationMessage = () => {

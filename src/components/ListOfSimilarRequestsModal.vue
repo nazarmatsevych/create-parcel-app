@@ -39,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import { useRequestsStore } from "@/stores/requests";
 import { computed } from "vue";
 import type { IOrderTypeForm, IDeliverTypeForm } from "@/types/request.types";
@@ -53,8 +52,7 @@ const props = defineProps<{
 
 const requestsStore = useRequestsStore();
 
-const route = useRoute();
-const currentUserId = route.params.id;
+const currentUserId = requestsStore.currentUserId;
 
 const isMatchingRequest = (
   requestA: IDeliverTypeForm | IOrderTypeForm,

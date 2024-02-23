@@ -1,7 +1,7 @@
 <template>
   <header class="flex justify-evenly">
     <img
-      @click="$router.push(`/${userId}`)"
+      @click="$router.push(`/${requestsStore.currentUserId}`)"
       alt="Vue logo"
       class="logo cursor-pointer"
       src="@/assets/logo-parcel.svg"
@@ -11,8 +11,8 @@
 
     <div class="wrapper">
       <nav>
-        <RouterLink :to="`/${userId}/create`">Create Request</RouterLink>
-        <RouterLink :to="`/${userId}/requests`">User Requests</RouterLink>
+        <RouterLink :to="`/${requestsStore.currentUserId}/create`">Create Request</RouterLink>
+        <RouterLink :to="`/${requestsStore.currentUserId}/requests`">User Requests</RouterLink>
         <RouterLink to="/requests">All Requests</RouterLink>
       </nav>
     </div>
@@ -24,21 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView, useRoute } from "vue-router";
-import { ref, watch } from "vue";
+import { RouterLink, RouterView } from "vue-router";
+import { useRequestsStore } from '@/stores/requests';
 
-const route = useRoute();
-
-const userId = ref("1");
-
-watch(
-  () => route.params.id,
-  (newId) => {
-    if (newId) {
-      userId.value = newId.toString();
-    }
-  },
-);
+const requestsStore = useRequestsStore()
 </script>
 
 <style scoped>

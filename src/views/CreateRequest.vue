@@ -19,24 +19,23 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { ERequestType } from "@/types/request.enums";
 import { useRequestsStore } from "@/stores/requests";
 
 const router = useRouter();
-const route = useRoute();
 
 const requestsStore = useRequestsStore();
 
 const selectOrderType = () => {
   requestsStore.changeSelectedRequestType(ERequestType.ORDER);
 
-  router.push(`/${route.params.id}/create/order`);
+  router.push(`/${requestsStore.currentUserId}/create/order`);
 };
 
 const selectDeliverType = () => {
   requestsStore.changeSelectedRequestType(ERequestType.DELIVER);
 
-  router.push(`/${route.params.id}/create/deliver`);
+  router.push(`/${requestsStore.currentUserId}/create/deliver`);
 };
 </script>

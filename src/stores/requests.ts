@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import type { IDeliverTypeForm, IOrderTypeForm } from "@/types/request.types";
 import { useRoute } from "vue-router";
 import { formatDate } from "@/utils/parseDate";
@@ -20,6 +20,19 @@ export const useRequestsStore = defineStore("analyticsStore", () => {
 
   const selectedRequestType = ref(initialRequestType);
 
+  const currentUserId = ref(localStorage.getItem('currentUserId') || '1');
+
+  watch(
+    () => route.params.id,
+    (newId) => {
+      if (newId) {
+        currentUserId.value = newId.toString();
+
+        localStorage.setItem('currentUserId', JSON.stringify(currentUserId.value))
+      }
+    }
+  );
+
   const changeSelectedRequestType = (requestType: ERequestType) => {
     selectedRequestType.value = requestType;
 
@@ -36,7 +49,7 @@ export const useRequestsStore = defineStore("analyticsStore", () => {
   const addRequest = (request: IOrderTypeForm | IDeliverTypeForm) => {
     requests.value.push({
       ...request,
-      userId: route.params.id as string,
+      userId: currentUserId.value,
       dateOfCreation: formatDate(new Date()),
       id: requests.value.length + 1,
       selectedRequestType: selectedRequestType.value,
@@ -48,6 +61,7 @@ export const useRequestsStore = defineStore("analyticsStore", () => {
   return {
     requests,
     selectedRequestType,
+    currentUserId,
     addRequest,
     changeSelectedRequestType,
     saveRequestsToStorage,
