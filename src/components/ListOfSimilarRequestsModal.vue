@@ -52,7 +52,7 @@ const props = defineProps<{
 
 const requestsStore = useRequestsStore();
 
-const currentUserId = requestsStore.currentUserId;
+const currentUserId = computed(() => requestsStore.currentUserId);
 
 const isMatchingRequest = (
   requestA: IDeliverTypeForm | IOrderTypeForm,
@@ -72,7 +72,7 @@ const matchedRequests = computed<(IOrderTypeForm & IDeliverTypeForm)[]>(() => {
   if (!currentRequest) return [];
 
   return requestsStore.requests.filter((request) => {
-    if (request.userId === currentUserId) return false;
+    if (request.userId === currentUserId.value) return false;
     return isMatchingRequest(currentRequest, request);
   });
 });
